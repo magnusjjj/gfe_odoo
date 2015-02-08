@@ -1,0 +1,170 @@
+<openerp>
+<data>
+<template id="gfe_signup.index"> 
+	<t t-call="website.layout">
+	<t t-set="title">Signup</t>
+	<div class="oe-structure">
+		<br/>
+		<div class="container-fluid">
+			<div class="center-block col-md-8" style="float: none;">
+				<div class="col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Login!</h3>
+						</div>
+						<div class="panel-body">
+							<form method="post" action="/web/login" class="col-md-12">
+								<div class="form-group field-login">
+									<label for="login" class="control-label" autofocus="autofocus" >Your Email</label>
+									<input type="text" name="login" t-att-value="login" id="login" class="form-control" required="required" t-att-readonly="'readonly' if only_passwords else None"/>
+								</div>
+								<div class="form-group field-password">
+									<label for="password" class="control-label">Password</label>
+									<input type="password" name="password" id="password" class="form-control" required="required" t-att-autofocus="'autofocus' if only_passwords else None"/>
+								</div>
+								<input type="submit" class="btn btn-primary" value="Log in"/>
+							</form>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Become a member!</h3>
+						</div>
+						<div class="panel-body">
+							<t t-if="haserrors">
+								<div class="alert alert-danger">
+									<ul>
+										<t t-foreach="errors" t-as="error">
+											<li><t t-esc="error"/></li>
+										</t>
+									</ul>
+								</div>
+							</t>
+							<form method="post" class="col-md-12 form-horizontal">
+								<div class="form-group field-x_country">
+									<label for="x_country" class="control-label">Country*</label>
+									<select name="x_country" class="form-control"  required="required">
+										<t t-foreach="countries" t-as="country">
+											<option t-att-value="country.id" t-att-selected="'selected' if x_country == str(country.id)  else ''"><t t-esc="country.name"/></option>
+										</t>
+									</select>
+									<p class="help-block">What country are you from?</p>
+								</div>
+								
+								<div class="form-group field-x_birthdate">
+									<label for="x_birthdate" class="control-label">Birthdate*</label>
+									<input type="text" name="x_birthdate" t-att-value="x_birthdate" id="x_birthdate" class="form-control" required="required"/>
+									<p class="help-block">When were you born? The format should be in YYYY-MM-DD.</p>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-6 pull-left" style="padding-left: 0">
+										<div class="input-group field-x_firstname">
+											<label for="x_firstname" class="control-label">First name*</label>
+											<input type="text" name="x_firstname" t-att-value="x_firstname" id="x_firstname" class="form-control" required="required"/>
+										</div>
+									</div>
+									<div class="col-lg-6 pull-right" style="padding-right: 0">
+										<div class="input-group field-x_surname">
+											<label for="x_surname" class="control-label">Surname*</label>
+											<input type="text" name="x_surname" t-att-value="x_surname" id="x_surname" class="form-control" required="required"/>
+										</div>
+									</div>
+								</div>
+								
+
+
+								<div class="form-group field-x_socialsecuritynumber">
+									<label for="x_socialsecuritynumber" class="control-label">Social Security Number (personnummer)*</label>
+									<input type="text" name="x_socialsecuritynumber" t-att-value="x_socialsecuritynumber" id="x_socialsecuritynumber" class="form-control"  />
+									<p class="help-block">If your country has something called a 'Social Security number', type it in here, otherwise leave it empty. It helps us identify you, and is *required* for swedish members.</p>
+								</div>
+
+								<div class="form-group field-x_careof">
+									<label for="x_careof" class="control-label">Care Of (C/O)</label>
+									<input type="text" name="x_careof" t-att-value="x_careof" id="x_careof" class="form-control"/>
+									<p class="help-block">It can be left empty. Basically, if you live somewhere that you are not registered for the postal service, type the name of a person who does here.</p>
+								</div>
+
+								<div class="form-group field-x_adress">
+									<label for="x_adress" class="control-label">Street name and number*</label>
+									<input type="text" name="x_adress" t-att-value="x_adress" id="x_adress" class="form-control"  required="required"/>
+								</div>
+
+								<div class="form-group field-x_zipcode">
+									<label for="x_zipcode" class="control-label">Zip code / Post code / Area code*</label>
+									<input type="text" name="x_zipcode" t-att-value="x_zipcode" id="x_zipcode" class="form-control"  required="required"/>
+								</div>
+
+								<div class="form-group field-x_city">
+									<label for="x_city" class="control-label">City*</label>
+									<input type="text" name="x_city" t-att-value="x_city" id="x_city" class="form-control"  required="required"/>
+								</div>
+
+								<div class="form-group field-x_phone">
+									<label for="x_phone" class="control-label">Phone number*</label>
+									<input type="text" name="x_phone" t-att-value="x_phone" id="x_phone" class="form-control"  required="required"/>
+									<p class="help-block">It would help us a lot if you added the country prefix, but if you cant figure it out leave it out.</p>
+								</div>
+
+								<div class="form-group field-x_other_phone">
+									<label for="x_other_phone" class="control-label">Other phone number</label>
+									<input type="text" name="x_other_phone" t-att-value="x_other_phone" id="x_other_phone" class="form-control"  />
+								</div>
+
+								<div class="form-group field-login">
+									<label for="login" class="control-label">Your Email*</label>
+									<input type="text" name="login" t-att-value="login" id="login" class="form-control" required="required" t-att-readonly="'readonly' if only_passwords else None"/>
+								</div>
+								
+								<div class="checkbox field-x_accept1">
+									<p class="help-block">Before coming a member of Gaming For Everyone, you need to accept http://gfe.nu/about-us/statutes/ . This is the document that describes what a member is, what Gaming For Everyone is, and how your democratic rights in the association works.</p>
+									<label for="x_accept1" class="control-label">
+										<input type="checkbox" name="x_accept1" value="checked" t-att-checked="x_accept1" id="x_accept1" required="required"/> I accept Gaming For Everyone's statutes.*
+									</label>
+									
+								</div>
+								<div class="checkbox field-x_accept2">
+									<p class="help-block">Before becoming a member, we need you to understand how we are going to use your personal information. For one thing, we are going to store your information in a database. This database *might* be outside of EU, and might move inside and outside of EU. This is because we use Google Forms for our membership database, and they keep backups all over the world. Apart from that, we are also going to use your personal information when applying for grants. This is because some organisations require proof that we have a certain amount of members. Apart from that, we usually only use your private information to contact you for things like the annual meeting.</p>
+									<label for="x_accept2" class="control-label">
+										<input type="checkbox" name="x_accept2" value="checked" t-att-checked="x_accept2" id="x_accept2" required="required"/> I accept how you are going to use my personal information.*
+									</label>
+								</div>
+								<div class="checkbox field-x_accept3">
+									<p class="help-block">We apply for grants from Sverok, and other organisations. When we do that, we give them our membership list. They in turn need to do a few random checks so that the membership list is accurate, and that we have not just put a bunch of random people in it without their knowledge. They do this by calling a random number of persons from the membership list and asking 'Are you a member of Gaming For Everyone?' to which you should reply 'Yes'.</p>
+									<label for="x_accept3" class="control-label">
+										<input type="checkbox" name="x_accept3" value="checked" t-att-checked="x_accept3" id="x_accept3" required="required"/> I understand that Sverok and other organisations might contact me.*
+									</label>
+								</div>
+								<div class="form-group field-password">
+									<label for="password" class="control-label">Password</label>
+									<input type="password" name="password" id="password" class="form-control" required="required" t-att-autofocus="'autofocus' if only_passwords else None"/>
+								</div>								
+								<br/>
+								<input type="submit" class="btn btn-primary" value="Become a member!"/>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+</t>
+</template>
+<record id="gfe_register_email" model="email.template">
+	<field name="name">GFE Register Email</field>
+	<field name="model_id" ref="base.model_res_users"/>
+	<field name="email_from"><![CDATA[${object.company_id.name} <${(object.company_id.email or user.email)|safe}>]]></field>
+	<field name="email_to">${object.email|safe}</field>
+	<field name="subject">Welcome to GFE!</field>
+	<field name="body_html"><![CDATA[
+<p>Welcome to GFE!.</p>
+<p>You can login to the membership system at <a href="http://m.gfe.nu/">m.gfe.nu</a></p>
+<p>Your username is ${object.email}</p>]]></field>
+</record>
+</data>
+</openerp>

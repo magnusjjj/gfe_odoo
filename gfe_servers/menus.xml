@@ -1,0 +1,11 @@
+<openerp>
+    <data>
+		<record model="ir.actions.act_window" id="action_list_servers">
+			<field name="name">Servers</field>
+			<field name="res_model">gfe.server</field>
+			<field name="view_mode">kanban,form</field>
+		</record>
+		<menuitem id="menu_servers" parent="" name="Servers" sequence="10"
+				  action="action_list_servers"/>
+    </data>
+</openerp>
